@@ -60,7 +60,6 @@ function displayExercises(todayExercises) {
         if (timeMatch) {
             timerButton = document.createElement("span");
             timerButton.textContent = "⏱️";
-            timerButton.classList.add("timer-button");
             timerButton.style.cursor = "pointer";
 
             const timeValue = parseInt(timeMatch[1]);
