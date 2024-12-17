@@ -20,6 +20,7 @@ fetch("data.json")
 function displayExercises(todayExercises) {
     exerciseListElement.innerHTML = "";
 
+    // Indicateur de routine
     const routineTracker = document.createElement("p");
     routineTracker.textContent = `Routine : ${routineCounter}/${maxRoutine}`;
     routineTracker.id = "routine-tracker";
@@ -27,16 +28,17 @@ function displayExercises(todayExercises) {
     routineTracker.style.marginBottom = "10px";
     exerciseListElement.appendChild(routineTracker);
 
+    const checkboxes = []; // Stocke toutes les checkboxes pour vérification
+
     todayExercises.forEach((exercise) => {
         const listItem = document.createElement("li");
-        listItem.draggable = true; // Activation du drag and drop
+        listItem.draggable = true;
         listItem.classList.add("draggable");
 
-        // Conteneur gauche pour checkbox et texte
+        // Conteneur gauche (checkbox + texte)
         const leftContainer = document.createElement("div");
         leftContainer.style.display = "flex";
         leftContainer.style.alignItems = "center";
-        leftContainer.style.flex = "1";
 
         // Checkbox
         const checkbox = document.createElement("input");
@@ -51,14 +53,14 @@ function displayExercises(todayExercises) {
         leftContainer.appendChild(checkbox);
         leftContainer.appendChild(text);
 
-        // Emoji minuteur si une durée est détectée
+        // Emoji minuteur (si une durée est détectée)
         const timeMatch = exercise.match(/(\d+)\s*(s|min)/i);
         let timerButton = null;
 
         if (timeMatch) {
             timerButton = document.createElement("span");
             timerButton.textContent = "⏱️";
-            timerButton.style.marginLeft = "10px";
+            timerButton.classList.add("timer-button");
             timerButton.style.cursor = "pointer";
 
             const timeValue = parseInt(timeMatch[1]);
@@ -70,14 +72,20 @@ function displayExercises(todayExercises) {
                 updateTimerDisplay();
                 alert(`Minuteur configuré sur ${formatTime(remainingTime)} pour "${exercise}"`);
             });
+
+            listItem.appendChild(leftContainer); // Conteneur gauche
+            listItem.appendChild(timerButton);   // Emoji timer tout à droite
+        } else {
+            listItem.appendChild(leftContainer);
         }
 
-        // Ajout des éléments au listItem
-        listItem.appendChild(leftContainer); // Conteneur de gauche (checkbox + texte)
-        if (timerButton) {
-            listItem.appendChild(timerButton); // Emoji ⏱️ tout à droite
-        }
+        // Événement pour rayer les exercices cochés
+        checkbox.addEventListener("change", () => {
+            listItem.classList.toggle("checked", checkbox.checked);
+            checkCompletion(checkboxes, routineTracker);
+        });
 
+        checkboxes.push(checkbox); // Ajoute la checkbox au tableau
         exerciseListElement.appendChild(listItem);
 
         // Drag and drop
@@ -88,29 +96,28 @@ function displayExercises(todayExercises) {
     addDragAndDropFunctionality();
 }
 
-
-// Vérifie la complétion de la routine
-function checkCompletion() {
-    const allChecked = [...document.querySelectorAll("li input[type=checkbox]")].every(input => input.checked);
+// Vérifie si toutes les cases sont cochées
+function checkCompletion(checkboxes, routineTracker) {
+    const allChecked = checkboxes.every((checkbox) => checkbox.checked);
     if (allChecked && routineCounter < maxRoutine) {
         routineCounter++;
-        document.getElementById("routine-tracker").textContent = `Routine : ${routineCounter}/${maxRoutine}`;
-        if (routineCounter < maxRoutine) resetExercises();
+        routineTracker.textContent = `Routine : ${routineCounter}/${maxRoutine}`;
+        if (routineCounter < maxRoutine) resetExercises(checkboxes);
         else showCelebration();
     }
 }
 
-// Réinitialise toutes les cases
-function resetExercises() {
-    document.querySelectorAll("li input[type=checkbox]").forEach(input => {
-        input.checked = false;
-        input.parentElement.classList.remove("checked");
+// Réinitialise les cases cochées
+function resetExercises(checkboxes) {
+    checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+        checkbox.parentElement.parentElement.classList.remove("checked");
     });
 }
 
-// Drag and drop : Ajoute la logique
+// Drag and drop
 function addDragAndDropFunctionality() {
-    exerciseListElement.addEventListener("dragover", e => {
+    exerciseListElement.addEventListener("dragover", (e) => {
         e.preventDefault();
         const draggingItem = document.querySelector(".dragging");
         const afterElement = getDragAfterElement(exerciseListElement, e.clientY);
@@ -124,21 +131,24 @@ function addDragAndDropFunctionality() {
 
 function getDragAfterElement(container, y) {
     const draggableElements = [...container.querySelectorAll(".draggable:not(.dragging)")];
-    return draggableElements.reduce((closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child };
-        } else {
-            return closest;
-        }
-    }, { offset: Number.NEGATIVE_INFINITY }).element;
+    return draggableElements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        },
+        { offset: Number.NEGATIVE_INFINITY }
+    ).element;
 }
 
 // Minuteur
 function formatTime(seconds) {
-    const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const secs = String(seconds % 60).padStart(2, '0');
+    const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const secs = String(seconds % 60).padStart(2, "0");
     return `${minutes}:${secs}`;
 }
 
@@ -174,7 +184,7 @@ document.getElementById("reset-btn").addEventListener("click", () => {
 
 updateTimerDisplay();
 
-// Fonction pour afficher les emojis 🎉🎊🎈
+// Animation de célébration 🎉
 function showCelebration() {
     for (let i = 0; i < 50; i++) {
         const emoji = document.createElement("div");
