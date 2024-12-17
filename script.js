@@ -66,15 +66,21 @@ fetch("data.json")
         exerciseListElement.innerHTML = "<p>Impossible de charger les exercices.</p>";
     });
 
-// Afficher les exercices avec emoji minuteur
+// Fonction pour afficher les exercices avec emoji minuteur
 function displayExercises(todayExercises) {
     exerciseListElement.innerHTML = "";
 
     todayExercises.forEach((exercise) => {
         const listItem = document.createElement("li");
-        listItem.style.display = "flex"; // Utilise flexbox pour organiser les éléments
-        listItem.style.justifyContent = "space-between"; // Espacement maximal entre les enfants
-        listItem.style.alignItems = "center"; // Centre verticalement les éléments
+        listItem.style.display = "flex";
+        listItem.style.alignItems = "center";
+        listItem.style.justifyContent = "space-between"; // Aligne les éléments correctement
+
+        // Conteneur pour la partie gauche (checkbox + texte)
+        const leftContainer = document.createElement("div");
+        leftContainer.style.display = "flex";
+        leftContainer.style.alignItems = "center";
+        leftContainer.style.flex = "1"; // Prend tout l'espace disponible
 
         // Checkbox
         const checkbox = document.createElement("input");
@@ -84,18 +90,17 @@ function displayExercises(todayExercises) {
         // Texte de l'exercice
         const text = document.createElement("span");
         text.textContent = exercise;
-        text.style.flex = "1"; // Permet au texte de prendre tout l'espace disponible
 
         // Emoji minuteur si l'exercice contient du temps
         const timeMatch = exercise.match(/(\d+)\s*(s|min)/i);
-        let timerButton; // Déclare l'emoji timer
+        let timerButton = null;
 
         if (timeMatch) {
             timerButton = document.createElement("span");
             timerButton.textContent = "⏱️";
-            timerButton.classList.add("timer-button"); // Ajoute une classe pour le style
+            timerButton.classList.add("timer-button");
             timerButton.style.cursor = "pointer";
-            timerButton.style.marginLeft = "10px"; // Espace entre le texte et l'emoji
+            timerButton.style.marginLeft = "10px";
 
             const timeValue = parseInt(timeMatch[1]);
             const timeUnit = timeMatch[2].toLowerCase();
@@ -109,20 +114,25 @@ function displayExercises(todayExercises) {
             });
         }
 
-        // Événement de coche
-        checkbox.addEventListener("change", () => {
-            text.style.textDecoration = checkbox.checked ? "line-through" : "none";
-        });
+        // Ajout des éléments dans le conteneur gauche
+        leftContainer.appendChild(checkbox);
+        leftContainer.appendChild(text);
 
-        // Organisation des éléments dans la liste
-        listItem.appendChild(checkbox); // Ajoute la checkbox
-        listItem.appendChild(text); // Ajoute le texte
-
-        if (timeMatch) {
-            listItem.appendChild(timerButton); // Ajoute l'emoji uniquement s'il y a du temps
+        // Ajout des éléments dans la liste principale
+        listItem.appendChild(leftContainer); // Conteneur gauche
+        if (timerButton) {
+            listItem.appendChild(timerButton); // Emoji ⏱️ uniquement si un temps est trouvé
         }
 
         exerciseListElement.appendChild(listItem);
     });
 }
 
+
+// Initialise le minuteur à 00:00
+updateTimerDisplay();
+
+// Écouteurs pour les boutons de contrôle du minuteur
+startButton.addEventListener("click", startTimer);
+stopButton.addEventListener("click", stopTimer);
+resetButton.addEventListener("click", resetTimer);
