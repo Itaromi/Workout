@@ -68,19 +68,19 @@ fetch("data.json")
 
 // Fonction pour afficher les exercices avec emoji minuteur
 function displayExercises(todayExercises) {
-    exerciseListElement.innerHTML = "";
+    exerciseListElement.innerHTML = ""; // Efface la liste précédente
 
     todayExercises.forEach((exercise) => {
         const listItem = document.createElement("li");
         listItem.style.display = "flex";
         listItem.style.alignItems = "center";
-        listItem.style.justifyContent = "space-between"; // Aligne les éléments correctement
+        listItem.style.justifyContent = "space-between";
 
         // Conteneur pour la partie gauche (checkbox + texte)
         const leftContainer = document.createElement("div");
         leftContainer.style.display = "flex";
         leftContainer.style.alignItems = "center";
-        leftContainer.style.flex = "1"; // Prend tout l'espace disponible
+        leftContainer.style.flex = "1";
 
         // Checkbox
         const checkbox = document.createElement("input");
@@ -91,7 +91,7 @@ function displayExercises(todayExercises) {
         const text = document.createElement("span");
         text.textContent = exercise;
 
-        // Emoji minuteur si l'exercice contient du temps
+        // Emoji minuteur si l'exercice contient une durée
         const timeMatch = exercise.match(/(\d+)\s*(s|min)/i);
         let timerButton = null;
 
@@ -106,7 +106,6 @@ function displayExercises(todayExercises) {
             const timeUnit = timeMatch[2].toLowerCase();
             const totalTimeInSeconds = timeUnit === "min" ? timeValue * 60 : timeValue;
 
-            // Configure le minuteur lorsqu'on clique sur l'emoji
             timerButton.addEventListener("click", () => {
                 remainingTime = totalTimeInSeconds;
                 updateTimerDisplay();
@@ -114,19 +113,28 @@ function displayExercises(todayExercises) {
             });
         }
 
-        // Ajout des éléments dans le conteneur gauche
+        // Ajout de l'événement pour cocher et changer le style
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+                listItem.classList.add("checked");
+            } else {
+                listItem.classList.remove("checked");
+            }
+        });
+
+        // Organisation des éléments
         leftContainer.appendChild(checkbox);
         leftContainer.appendChild(text);
+        listItem.appendChild(leftContainer);
 
-        // Ajout des éléments dans la liste principale
-        listItem.appendChild(leftContainer); // Conteneur gauche
         if (timerButton) {
-            listItem.appendChild(timerButton); // Emoji ⏱️ uniquement si un temps est trouvé
+            listItem.appendChild(timerButton);
         }
 
         exerciseListElement.appendChild(listItem);
     });
 }
+
 
 
 // Initialise le minuteur à 00:00
