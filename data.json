@@ -1,35 +1,69 @@
 {
-    "lundi": [
-      { "nom": "Badminton", "durée": "1h30", "type": "temps" },
-      { "nom": "Étirements quadriceps", "séries": 2, "durée": "30s par jambe" },
-      { "nom": "Étirements ischio-jambiers", "séries": 2, "durée": "30s par jambe" },
-      { "nom": "Étirements mollets", "séries": 2, "durée": "30s par jambe" },
-      { "nom": "Dos rond", "séries": 2, "durée": "30s" },
-      { "nom": "Étirements épaules croisé", "séries": 2, "durée": "30s par bras" }
-    ],
-    "mardi": [
-      { "nom": "Pompes avec poignées", "répétitions": 15, "séries": 3 },
-      { "nom": "Tractions assistées (élastique)", "répétitions": 8, "séries": 3 },
-      { "nom": "Fentes avec haltères", "répétitions": 12, "séries": 3 },
-      { "nom": "Superman", "répétitions": 15, "séries": 3 },
-      { "nom": "Planche abdominale", "durée": "1 min", "séries": 2 },
-      { "nom": "Crunchs classiques", "répétitions": 20, "séries": 2 }
-    ],
-    "mercredi": [
-      { "nom": "HIIT corde à sauter", "durée": "10 min", "type": "temps" },
-      { "nom": "Mountain climbers", "durée": "30s", "séries": 4 },
-      { "nom": "Relevés de jambes", "répétitions": 15, "séries": 4 },
-      { "nom": "Sit-ups", "répétitions": 15, "séries": 4 },
-      { "nom": "Planche dynamique", "durée": "30s", "séries": 3 }
-    ],
-    "vendredi": [
-      { "nom": "Tractions assistées (élastique)", "répétitions": 8, "séries": 3 },
-      { "nom": "Pompes diamant", "répétitions": 12, "séries": 3 },
-      { "nom": "Rowing avec élastique", "répétitions": 12, "séries": 3 },
-      { "nom": "Développé haltères", "répétitions": 12, "séries": 3 },
-      { "nom": "Gainage bras alternés", "durée": "30s", "séries": 2 },
-      { "nom": "Planche classique", "durée": "1 min", "séries": 2 },
-      { "nom": "Planche latérale", "durée": "30s par côté", "séries": 2 }
-    ]
-  }
-  
+  "lundi": [
+    "Badminton (1h30)",
+    "Étirements quadriceps",
+    "Étirements ischio-jambiers",
+    "Étirements mollets",
+    "Étirement du dos rond",
+    "Étirement des épaules croisé"
+  ],
+  "mardi": [
+    "Pompes avec poignées (15 répétitions)",
+    "Tractions assistées avec élastique (8 répétitions)",
+    "Fentes avec haltères (12 répétitions par jambe)",
+    "Superman (15 répétitions)",
+    "Planche abdominale (1 min)",
+    "Crunchs classiques (20 répétitions)",
+    "Étirement des quadriceps",
+    "Étirement des ischio-jambiers",
+    "Étirement des abdominaux (position cobra)"
+  ],
+  "mercredi": [
+    "HIIT corde à sauter (10 min : 30s rapide / 30s lent)",
+    "Mountain climbers (30 secondes)",
+    "Relevés de jambes (15 répétitions)",
+    "Sit-ups (15 répétitions)",
+    "Planche dynamique (30 secondes)",
+    "Étirement du bas du dos",
+    "Étirement des abdominaux (position cobra)",
+    "Étirement des épaules et des jambes"
+  ],
+  "jeudi": [
+    "Badminton (1h30)",
+    "Étirements quadriceps",
+    "Étirements ischio-jambiers",
+    "Étirements mollets",
+    "Étirement du dos rond",
+    "Étirement des épaules croisé"
+  ],
+  "vendredi": [
+    "Tractions assistées avec élastique (8 répétitions)",
+    "Pompes diamant (12 répétitions)",
+    "Rowing avec élastique (12 répétitions)",
+    "Développé haltères (12 répétitions)",
+    "Gainage avec élévation de bras alternés (30 secondes)",
+    "Planche classique (1 min)",
+    "Planche latérale (30 secondes de chaque côté)",
+    "Étirement des épaules",
+    "Étirement des trapèzes",
+    "Étirement du dos rond"
+  ],
+  "samedi": [
+    "Repos complet",
+    "Étirement doux du bas du dos",
+    "Étirement quadriceps",
+    "Étirement ischio-jambiers",
+    "Étirement mollets",
+    "Étirement des épaules",
+    "Respiration profonde et relaxation"
+  ],
+  "dimanche": [
+    "Repos complet",
+    "Étirement doux du bas du dos",
+    "Étirement quadriceps",
+    "Étirement ischio-jambiers",
+    "Étirement mollets",
+    "Étirement des épaules",
+    "Respiration profonde et relaxation"
+  ]
+}
