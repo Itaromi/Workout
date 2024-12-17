@@ -1,59 +1,10 @@
-// Variables pour le minuteur
-let timerInterval;
-let remainingTime = 0;
-
-// Sélection des éléments du minuteur
-const timerDisplay = document.getElementById('timer');
-const startButton = document.getElementById('start-btn');
-const stopButton = document.getElementById('stop-btn');
-const resetButton = document.getElementById('reset-btn');
-
-// Fonction pour formater le temps (mm:ss)
-function formatTime(seconds) {
-    const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const secs = String(seconds % 60).padStart(2, '0');
-    return `${minutes}:${secs}`;
-}
-
-// Met à jour l'affichage du minuteur
-function updateTimerDisplay() {
-    timerDisplay.textContent = formatTime(remainingTime);
-}
-
-// Fonction pour démarrer le minuteur
-function startTimer() {
-    if (remainingTime > 0 && !timerInterval) {
-        timerInterval = setInterval(() => {
-            remainingTime--;
-            updateTimerDisplay();
-            if (remainingTime <= 0) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-                alert("Le temps est écoulé !");
-            }
-        }, 1000);
-    }
-}
-
-// Fonction pour arrêter le minuteur
-function stopTimer() {
-    clearInterval(timerInterval);
-    timerInterval = null;
-}
-
-// Fonction pour réinitialiser le minuteur
-function resetTimer() {
-    stopTimer();
-    remainingTime = 0;
-    updateTimerDisplay();
-}
-
-// Charger les exercices
 let exercises = {};
-const currentDay = new Date().toLocaleDateString('fr-FR', { weekday: 'long' }).toLowerCase();
+const exerciseListElement = document.getElementById("exercise-list");
+const currentDay = new Date().toLocaleDateString("fr-FR", { weekday: "long" }).toLowerCase();
 document.getElementById("current-day").innerText = `Exercices du ${currentDay}`;
 
-const exerciseListElement = document.getElementById("exercise-list");
+let routineCounter = 0; // Compteur de routines réalisées
+const maxRoutine = 3; // Maximum de routines à réaliser par jour
 
 fetch("data.json")
     .then(response => response.json())
@@ -63,24 +14,27 @@ fetch("data.json")
     })
     .catch(error => {
         console.error("Erreur de chargement JSON :", error);
-        exerciseListElement.innerHTML = "<p>Impossible de charger les exercices.</p>";
     });
 
-// Fonction pour afficher les exercices avec emoji minuteur
+// Fonction pour afficher les exercices
 function displayExercises(todayExercises) {
     exerciseListElement.innerHTML = ""; // Efface la liste précédente
+
+    // Crée l'indicateur de routine
+    const routineTracker = document.createElement("p");
+    routineTracker.textContent = `Routine : ${routineCounter}/${maxRoutine}`;
+    routineTracker.id = "routine-tracker";
+    routineTracker.style.marginBottom = "10px";
+    routineTracker.style.fontWeight = "bold";
+    exerciseListElement.appendChild(routineTracker);
+
+    const checkboxes = []; // Stocke toutes les cases pour vérification
 
     todayExercises.forEach((exercise) => {
         const listItem = document.createElement("li");
         listItem.style.display = "flex";
         listItem.style.alignItems = "center";
         listItem.style.justifyContent = "space-between";
-
-        // Conteneur pour la partie gauche (checkbox + texte)
-        const leftContainer = document.createElement("div");
-        leftContainer.style.display = "flex";
-        leftContainer.style.alignItems = "center";
-        leftContainer.style.flex = "1";
 
         // Checkbox
         const checkbox = document.createElement("input");
@@ -91,56 +45,48 @@ function displayExercises(todayExercises) {
         const text = document.createElement("span");
         text.textContent = exercise;
 
-        // Emoji minuteur si l'exercice contient une durée
-        const timeMatch = exercise.match(/(\d+)\s*(s|min)/i);
-        let timerButton = null;
+        // Ajout dans le tableau pour vérification
+        checkboxes.push(checkbox);
 
-        if (timeMatch) {
-            timerButton = document.createElement("span");
-            timerButton.textContent = "⏱️";
-            timerButton.classList.add("timer-button");
-            timerButton.style.cursor = "pointer";
-            timerButton.style.marginLeft = "10px";
-
-            const timeValue = parseInt(timeMatch[1]);
-            const timeUnit = timeMatch[2].toLowerCase();
-            const totalTimeInSeconds = timeUnit === "min" ? timeValue * 60 : timeValue;
-
-            timerButton.addEventListener("click", () => {
-                remainingTime = totalTimeInSeconds;
-                updateTimerDisplay();
-                alert(`Minuteur configuré sur ${formatTime(remainingTime)} pour "${exercise}"`);
-            });
-        }
-
-        // Ajout de l'événement pour cocher et changer le style
+        // Écouteur pour changer le style lorsque coché
         checkbox.addEventListener("change", () => {
             if (checkbox.checked) {
                 listItem.classList.add("checked");
             } else {
                 listItem.classList.remove("checked");
             }
+
+            // Vérifie si toutes les cases sont cochées
+            checkCompletion(checkboxes, routineTracker, todayExercises);
         });
 
         // Organisation des éléments
-        leftContainer.appendChild(checkbox);
-        leftContainer.appendChild(text);
-        listItem.appendChild(leftContainer);
-
-        if (timerButton) {
-            listItem.appendChild(timerButton);
-        }
-
+        listItem.appendChild(checkbox);
+        listItem.appendChild(text);
         exerciseListElement.appendChild(listItem);
     });
 }
 
+// Fonction pour vérifier si toutes les cases sont cochées
+function checkCompletion(checkboxes, routineTracker, todayExercises) {
+    if (checkboxes.every((checkbox) => checkbox.checked)) {
+        if (routineCounter < maxRoutine) {
+            routineCounter++;
+            routineTracker.textContent = `Routine : ${routineCounter}/${maxRoutine}`;
 
+            if (routineCounter < maxRoutine) {
+                resetExercises(checkboxes); // Réinitialise les exercices
+            } else {
+                alert("Bravo ! Tu as complété toutes les routines pour aujourd'hui 🎉");
+            }
+        }
+    }
+}
 
-// Initialise le minuteur à 00:00
-updateTimerDisplay();
-
-// Écouteurs pour les boutons de contrôle du minuteur
-startButton.addEventListener("click", startTimer);
-stopButton.addEventListener("click", stopTimer);
-resetButton.addEventListener("click", resetTimer);
+// Fonction pour réinitialiser toutes les cases
+function resetExercises(checkboxes) {
+    checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+        checkbox.parentElement.classList.remove("checked"); // Retire le style vert et rayé
+    });
+}
