@@ -90,3 +90,48 @@ function resetExercises(checkboxes) {
         checkbox.parentElement.classList.remove("checked"); // Retire le style vert et rayé
     });
 }
+
+function checkCompletion(checkboxes, routineTracker, todayExercises) {
+    if (checkboxes.every((checkbox) => checkbox.checked)) {
+        if (routineCounter < maxRoutine) {
+            routineCounter++;
+            routineTracker.textContent = `Routine : ${routineCounter}/${maxRoutine}`;
+
+            if (routineCounter < maxRoutine) {
+                resetExercises(checkboxes); // Réinitialise les exercices
+            } else {
+                showCelebration(); // Affiche les emojis animés
+            }
+        }
+    }
+}
+
+// Fonction pour afficher une animation de 🎉🎊🎈
+function showCelebration() {
+    const body = document.body;
+
+    for (let i = 0; i < 50; i++) {
+        const emoji = document.createElement("div");
+        emoji.classList.add("celebration-emoji");
+        emoji.textContent = getRandomEmoji(); // 🎉 ou 🎊 ou 🎈
+
+        // Position aléatoire
+        emoji.style.left = Math.random() * 100 + "vw";
+        emoji.style.top = Math.random() * 100 + "vh";
+        emoji.style.animationDuration = Math.random() * 2 + 3 + "s"; // 3 à 5s
+
+        body.appendChild(emoji);
+
+        // Supprime l'emoji après l'animation
+        setTimeout(() => {
+            emoji.remove();
+        }, 5000);
+    }
+}
+
+// Retourne un emoji aléatoire parmi 🎉🎊🎈
+function getRandomEmoji() {
+    const emojis = ["🎉", "🎊", "🎈"];
+    return emojis[Math.floor(Math.random() * emojis.length)];
+}
+
