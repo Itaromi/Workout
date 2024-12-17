@@ -1,0 +1,70 @@
+{
+    "lundi": [
+      "Badminton (1h30)",
+      "Étirements quadriceps",
+      "Étirements ischio-jambiers",
+      "Étirements mollets",
+      "Étirement du dos rond",
+      "Étirement des épaules croisé"
+    ],
+    "mardi": [
+      "Pompes avec poignées (15 répétitions)",
+      "Tractions assistées avec élastique (8 répétitions)",
+      "Fentes avec haltères (12 répétitions par jambe)",
+      "Superman (15 répétitions)",
+      "Planche abdominale (1 min)",
+      "Crunchs classiques (20 répétitions)",
+      "Étirement des quadriceps",
+      "Étirement des ischio-jambiers",
+      "Étirement des abdominaux (position cobra)"
+    ],
+    "mercredi": [
+      "HIIT corde à sauter (10 min : 30s rapide / 30s lent)",
+      "Mountain climbers (30 secondes)",
+      "Relevés de jambes (15 répétitions)",
+      "Sit-ups (15 répétitions)",
+      "Planche dynamique (30 secondes)",
+      "Étirement du bas du dos",
+      "Étirement des abdominaux (position cobra)",
+      "Étirement des épaules et des jambes"
+    ],
+    "jeudi": [
+      "Badminton (1h30)",
+      "Étirements quadriceps",
+      "Étirements ischio-jambiers",
+      "Étirements mollets",
+      "Étirement du dos rond",
+      "Étirement des épaules croisé"
+    ],
+    "vendredi": [
+      "Tractions assistées avec élastique (8 répétitions)",
+      "Pompes diamant (12 répétitions)",
+      "Rowing avec élastique (12 répétitions)",
+      "Développé haltères (12 répétitions)",
+      "Gainage avec élévation de bras alternés (30 secondes)",
+      "Planche classique (1 min)",
+      "Planche latérale (30 secondes de chaque côté)",
+      "Étirement des épaules",
+      "Étirement des trapèzes",
+      "Étirement du dos rond"
+    ],
+    "samedi": [
+      "Repos complet",
+      "Étirement doux du bas du dos",
+      "Étirement quadriceps",
+      "Étirement ischio-jambiers",
+      "Étirement mollets",
+      "Étirement des épaules",
+      "Respiration profonde et relaxation"
+    ],
+    "dimanche": [
+      "Repos complet",
+      "Étirement doux du bas du dos",
+      "Étirement quadriceps",
+      "Étirement ischio-jambiers",
+      "Étirement mollets",
+      "Étirement des épaules",
+      "Respiration profonde et relaxation"
+    ]
+  }
+  
