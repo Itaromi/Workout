@@ -3,8 +3,6 @@ const exerciseListElement = document.getElementById("exercise-list");
 const currentDay = new Date().toLocaleDateString("fr-FR", { weekday: "long" }).toLowerCase();
 document.getElementById("current-day").innerText = `Exercices du ${currentDay}`;
 
-let routineCounter = 0;
-const maxRoutine = 3;
 let timerInterval;
 let remainingTime = 0;
 
@@ -20,15 +18,7 @@ fetch("data.json")
 function displayExercises(todayExercises) {
     exerciseListElement.innerHTML = "";
 
-    // Indicateur de routine
-    const routineTracker = document.createElement("p");
-    routineTracker.textContent = `Routine : ${routineCounter}/${maxRoutine}`;
-    routineTracker.id = "routine-tracker";
-    routineTracker.style.fontWeight = "bold";
-    routineTracker.style.marginBottom = "10px";
-    exerciseListElement.appendChild(routineTracker);
-
-    const checkboxes = []; // Stocke toutes les checkboxes pour vérification
+    const checkboxes = [];
 
     todayExercises.forEach((exercise) => {
         const listItem = document.createElement("li");
@@ -55,10 +45,9 @@ function displayExercises(todayExercises) {
 
         // Emoji minuteur (si une durée est détectée)
         const timeMatch = exercise.match(/(\d+)\s*(s|min)/i);
-        let timerButton = null;
 
         if (timeMatch) {
-            timerButton = document.createElement("span");
+            const timerButton = document.createElement("span");
             timerButton.textContent = "⏱️";
             timerButton.style.cursor = "pointer";
 
@@ -72,8 +61,8 @@ function displayExercises(todayExercises) {
                 alert(`Minuteur configuré sur ${formatTime(remainingTime)} pour "${exercise}"`);
             });
 
-            listItem.appendChild(leftContainer); // Conteneur gauche
-            listItem.appendChild(timerButton);   // Emoji timer tout à droite
+            listItem.appendChild(leftContainer);
+            listItem.appendChild(timerButton);
         } else {
             listItem.appendChild(leftContainer);
         }
@@ -81,10 +70,10 @@ function displayExercises(todayExercises) {
         // Événement pour rayer les exercices cochés
         checkbox.addEventListener("change", () => {
             listItem.classList.toggle("checked", checkbox.checked);
-            checkCompletion(checkboxes, routineTracker);
+            if (checkboxes.every((cb) => cb.checked)) showCelebration();
         });
 
-        checkboxes.push(checkbox); // Ajoute la checkbox au tableau
+        checkboxes.push(checkbox);
         exerciseListElement.appendChild(listItem);
 
         // Drag and drop
@@ -93,25 +82,6 @@ function displayExercises(todayExercises) {
     });
 
     addDragAndDropFunctionality();
-}
-
-// Vérifie si toutes les cases sont cochées
-function checkCompletion(checkboxes, routineTracker) {
-    const allChecked = checkboxes.every((checkbox) => checkbox.checked);
-    if (allChecked && routineCounter < maxRoutine) {
-        routineCounter++;
-        routineTracker.textContent = `Routine : ${routineCounter}/${maxRoutine}`;
-        if (routineCounter < maxRoutine) resetExercises(checkboxes);
-        else showCelebration();
-    }
-}
-
-// Réinitialise les cases cochées
-function resetExercises(checkboxes) {
-    checkboxes.forEach((checkbox) => {
-        checkbox.checked = false;
-        checkbox.parentElement.parentElement.classList.remove("checked");
-    });
 }
 
 // Drag and drop
