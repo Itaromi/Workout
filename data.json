@@ -1,69 +1,70 @@
 {
   "lundi": [
-    "Badminton (1h30)",
-    "Étirements quadriceps",
-    "Étirements ischio-jambiers",
-    "Étirements mollets",
-    "Étirement du dos rond",
-    "Étirement des épaules croisé"
+    "🏸 Badminton (1h30)",
+    "Étirements quadriceps (30s chaque côté)",
+    "Étirements ischio-jambiers (30s chaque côté)",
+    "Étirements mollets (30s chaque côté)",
+    "Étirement des hanches — fente basse (30s chaque côté)",
+    "Étirement du dos rond (30s)"
   ],
   "mardi": [
-    "Pompes avec poignées (15 répétitions)",
-    "Tractions assistées avec élastique (8 répétitions)",
-    "Fentes avec haltères (12 répétitions par jambe)",
-    "Superman (15 répétitions)",
-    "Planche abdominale (1 min)",
-    "Crunchs classiques (20 répétitions)",
-    "Étirement des quadriceps",
-    "Étirement des ischio-jambiers",
-    "Étirement des abdominaux (position cobra)"
+    "🏃 Footing endurance — 8 à 10 km à 6:00–6:30/km",
+    "Échauffement : marche rapide 5 min",
+    "Course : 45 à 50 min allure facile (conversation possible)",
+    "Tibialis raises — mollets en dorsiflexion (3×20)",
+    "Montées de mollets debout (3×20)",
+    "Foam roller mollets (2 min chaque côté)",
+    "Étirements mollets (30s chaque côté)",
+    "Étirements quadriceps (30s chaque côté)",
+    "Étirements ischio-jambiers (30s chaque côté)"
   ],
   "mercredi": [
-    "HIIT corde à sauter (10 min : 30s rapide / 30s lent)",
-    "Mountain climbers (30 secondes)",
-    "Relevés de jambes (15 répétitions)",
-    "Sit-ups (15 répétitions)",
-    "Planche dynamique (30 secondes)",
-    "Étirement du bas du dos",
-    "Étirement des abdominaux (position cobra)",
-    "Étirement des épaules et des jambes"
+    "💪 Renforcement musculaire + gainage",
+    "Squats (3×15 répétitions)",
+    "Fentes avant (3×12 répétitions par jambe)",
+    "Montées de mollets (3×20 répétitions)",
+    "Tibialis raises (3×20 répétitions)",
+    "Pont fessier (3×20 répétitions)",
+    "Planche abdominale (3×1 min)",
+    "Planche latérale (3×30s chaque côté)",
+    "Bird-dog gainage (3×10 répétitions)",
+    "Étirements doux jambes et hanches (2 min)"
   ],
   "jeudi": [
-    "Badminton (1h30)",
-    "Étirements quadriceps",
-    "Étirements ischio-jambiers",
-    "Étirements mollets",
-    "Étirement du dos rond",
-    "Étirement des épaules croisé"
+    "🏸 Badminton (1h30)",
+    "Étirements quadriceps (30s chaque côté)",
+    "Étirements ischio-jambiers (30s chaque côté)",
+    "Étirements mollets (30s chaque côté)",
+    "Étirement des hanches — fente basse (30s chaque côté)",
+    "Étirement du dos rond (30s)"
   ],
   "vendredi": [
-    "Tractions assistées avec élastique (8 répétitions)",
-    "Pompes diamant (12 répétitions)",
-    "Rowing avec élastique (12 répétitions)",
-    "Développé haltères (12 répétitions)",
-    "Gainage avec élévation de bras alternés (30 secondes)",
-    "Planche classique (1 min)",
-    "Planche latérale (30 secondes de chaque côté)",
-    "Étirement des épaules",
-    "Étirement des trapèzes",
-    "Étirement du dos rond"
+    "⚡ Séance qualité — Fractionné long / Seuil",
+    "Échauffement : 15 min footing léger",
+    "3 × 8 min à allure seuil (~5:00/km)",
+    "Récupération : 3 min trot entre chaque bloc",
+    "Retour au calme : 10 min footing très léger",
+    "Tibialis raises (20 répétitions)",
+    "Étirements mollets et quadriceps (30s chaque)"
   ],
   "samedi": [
-    "Repos complet",
-    "Étirement doux du bas du dos",
-    "Étirement quadriceps",
-    "Étirement ischio-jambiers",
-    "Étirement mollets",
-    "Étirement des épaules",
-    "Respiration profonde et relaxation"
+    "🧘 Repos actif — Mobilité",
+    "Foam roller quadriceps (2 min chaque côté)",
+    "Foam roller mollets (2 min chaque côté)",
+    "Foam roller ischio-jambiers (2 min chaque côté)",
+    "Mobilité hanches — 90/90 (1 min chaque côté)",
+    "Étirement piriforme (30s chaque côté)",
+    "Étirement du bas du dos (30s)",
+    "Respiration abdominale profonde (5 min)"
   ],
   "dimanche": [
-    "Repos complet",
-    "Étirement doux du bas du dos",
-    "Étirement quadriceps",
-    "Étirement ischio-jambiers",
-    "Étirement mollets",
-    "Étirement des épaules",
-    "Respiration profonde et relaxation"
+    "🏃 Sortie longue — 12 à 14 km à ~6:00/km",
+    "Rester en zone 2 cardiaque (conversations possibles)",
+    "Ravitaillement si > 1h : eau + gel ou fruits secs",
+    "Foam roller jambes après course (5 min)",
+    "Étirements mollets (30s chaque côté)",
+    "Étirements quadriceps (30s chaque côté)",
+    "Étirements ischio-jambiers (30s chaque côté)",
+    "Hydratation et collation récupération"
   ]
 }
